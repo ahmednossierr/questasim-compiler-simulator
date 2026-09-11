@@ -1,0 +1,69 @@
+{
+  "name": "questasim-compiler-simulator",
+  "displayName": "QuestaSim Compiler & Simulator",
+  "description": "Compile and simulate Verilog/SystemVerilog projects with QuestaSim or ModelSim.",
+  "version": "0.1.5",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ahmednossierr/questasim-compiler-simulator.git"
+  },
+  "icon": "images/Logo.png",
+  "publisher": "AhmedNossier",
+  "license": "MIT",
+  "engines": { "vscode": "^1.85.0" },
+  "categories": ["Programming Languages", "Testing", "Other"],
+  "keywords": ["verilog", "systemverilog", "questa", "modelsim", "hdl", "simulation"],
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "workspaceContains:**/*.v",
+    "workspaceContains:**/*.sv",
+    "workspaceContains:**/*.vh",
+    "workspaceContains:**/*.svh"
+  ],
+  "contributes": {
+    "commands": [
+      { "command": "questa.generateSourceList", "title": "Questa: Generate Source List" },
+      { "command": "questa.generateRunDo", "title": "Questa: Generate run.do" },
+      { "command": "questa.compile", "title": "Questa: Compile" },
+      { "command": "questa.runSimulation", "title": "Questa: Run Simulation" },
+      { "command": "questa.runExistingRunDo", "title": "Questa: Run Existing run.do" },
+      { "command": "questa.selectTopModule", "title": "Questa: Select Top Module" },
+      { "command": "questa.refreshSources", "title": "Questa: Refresh Sources" },
+      { "command": "questa.showTranscript", "title": "Questa: Show Transcript" },
+      { "command": "questa.clearTranscript", "title": "Questa: Clear Transcript" },
+      { "command": "questa.openWaveform", "title": "Questa: Open Waveform" }
+    ],
+    "configuration": {
+      "title": "QuestaSim",
+      "properties": {
+        "questa.vsimPath": { "type": "string", "default": "", "description": "Absolute path to the QuestaSim/ModelSim vsim executable. Leave empty to use vsim from PATH." },
+        "questa.vlogPath": { "type": "string", "default": "", "description": "Absolute path to vlog. If empty, it is derived from vsimPath or resolved from PATH." },
+        "questa.topModule": { "type": "string", "default": "", "description": "Top-level module or entity to simulate, for example alu_tb." },
+        "questa.simulationDirectory": { "type": "string", "default": "sim", "description": "Directory, relative to the workspace, where Questa work libraries and generated scripts are kept." },
+        "questa.sourceListFile": { "type": "string", "default": "sources.f", "description": "Source-list filename, relative to the workspace." },
+        "questa.runDoFile": { "type": "string", "default": "run.do", "description": "Generated run.do filename, relative to the simulation directory." },
+        "questa.simulationMode": { "type": "string", "enum": ["console", "gui"], "default": "console", "description": "Run vsim in console mode or the Questa graphical interface." },
+        "questa.autoGenerateSourceList": { "type": "boolean", "default": true, "description": "Regenerate sources.f after HDL files are created, changed, renamed, or deleted." },
+        "questa.excludedDirectories": { "type": "array", "default": [".git", "node_modules", ".vscode", "work", "build", "sim", "out", "dist", "coverage"], "items": { "type": "string" }, "description": "Directory names excluded when discovering HDL files." },
+        "questa.sourceOrder": { "type": "array", "default": [], "items": { "type": "string" }, "description": "Optional ordered glob patterns used before the default header/package/RTL/testbench ordering." },
+        "questa.includeDirectories": { "type": "array", "default": [], "items": { "type": "string" }, "description": "Include directories, relative to the workspace or absolute, passed to vlog as +incdir+ arguments." },
+        "questa.macroDefinitions": { "type": "array", "default": [], "items": { "type": "string" }, "description": "Macro definitions passed to vlog as +define+NAME or +define+NAME=VALUE arguments." },
+        "questa.additionalVlogArguments": { "type": "array", "default": [], "items": { "type": "string" }, "description": "Additional vlog arguments. Each array entry is one argument." },
+        "questa.additionalVsimArguments": { "type": "array", "default": [], "items": { "type": "string" }, "description": "Additional vsim arguments. Each array entry is one argument." },
+        "questa.useIntegratedTerminal": { "type": "boolean", "default": false, "description": "Launch simulations in a VS Code integrated terminal instead of streaming them to the QuestaSim Output channel." }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p .",
+    "watch": "tsc -watch -p .",
+    "test": "npm run compile && node --test dist/test/*.test.js",
+    "package": "npm run compile && vsce package --no-dependencies --allow-missing-repository"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.30",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^3.2.1",
+    "typescript": "^5.4.5"
+  }
+}
