@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.6
+
+- Documentation only: replaced the tutorial GIF with a new recording of the complete workflow in VS Code (Select Top Module → Generate Source List → Generate run.do → Compile → Run Simulation) using a self-checking ALU testbench. The GIF has a new filename so the Marketplace and VS Code show the new animation instead of a cached copy. No functional changes.
+
 ## 0.1.5
 
 - Fixed the tutorial GIF showing as a broken image on the Marketplace page and in the VS Code Extension Details page. Neither renderer resolves relative image paths, even when the file ships inside the extension, so the README now references the GIF by absolute URL. Added a `repository` field so `vsce` can rewrite any future relative links automatically.

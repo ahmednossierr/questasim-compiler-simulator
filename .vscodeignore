@@ -7,3 +7,5 @@ example/**
 .gitignore
 tsconfig.json
 *.vsix
+demo/**
+media/**

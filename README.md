@@ -7,7 +7,7 @@ Run Verilog and SystemVerilog projects with **QuestaSim** or **ModelSim** direct
 See QuestaSim Compiler & Simulator in action and learn how to run Verilog/SystemVerilog simulations directly from VS Code.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/ahmednossierr/questasim-compiler-simulator/main/media/demo.gif" alt="QuestaSim Compiler & Simulator Tutorial" width="850">
+  <img src="https://raw.githubusercontent.com/ahmednossierr/questasim-compiler-simulator/main/media/demo-v0.1.6.gif" alt="QuestaSim Compiler & Simulator Tutorial" width="850">
 </p>
 
 ## What you need
